@@ -2,28 +2,451 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Tea &amp; Stats</title>
-    <link>http://selbydavid.com/</link>
+    <link>https://selbydavid.com/</link>
     <description>Tea, statistics and t-statistics: a data science blog by David Selby.</description>
 		<atom:author>
 			<atom:name>David Selby</atom:name>
-			<atom:uri>http://selbydavid.com</atom:uri>
+			<atom:uri>https://selbydavid.com</atom:uri>
 		</atom:author>
 		<image>
-		    <link>http://selbydavid.com/</link>
+		    <link>https://selbydavid.com/</link>
 		    <title>Tea &amp; Stats</title>
-		    <url>http://selbydavid.com/logo.png</url>
+		    <url>https://selbydavid.com/logo.png</url>
 		</image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-GB</language>
-    <lastBuildDate>Fri, 29 Dec 2017 15:00:00 +0000</lastBuildDate>
-    <atom:link href="http://selbydavid.com/" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Mar 2018 15:00:00 +0000</lastBuildDate>
+    <atom:link href="https://selbydavid.com/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Exploring influence in networks</title>
+      <link>https://selbydavid.com/2018/03/07/influence/</link>
+      <pubDate>Wed, 07 Mar 2018 15:00:00 +0000</pubDate>
+      
+      <guid>https://selbydavid.com/2018/03/07/influence/</guid>
+      <description>&lt;p&gt;I have just published an &lt;a href=&#34;http://selbydavid.com/influence/&#34;&gt;interactive graphic&lt;/a&gt; showing the effect of ranking scientific communities with pairwise comparison models.
+The visualisation is an interactive version of my (award-winning) &lt;em&gt;useR!2017&lt;/em&gt; poster, &lt;a href=&#34;http://selbydavid.com/2017/06/29/user2017/&#34;&gt;Ranking influential communities in networks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can see how academic journals have been grouped into communities based on their citation behaviour, and notice the relative ranking within and between fields.
+Occasionally journals don&amp;rsquo;t do so well within their field but are influential outside it, and vice versa.
+&lt;a href=&#34;http://selbydavid.com/influence/&#34;&gt;Have an explore&lt;/a&gt; and see how your favourite fields/journals fare!&lt;/p&gt;
+
+&lt;p&gt;Some interesting feedback so far from domain experts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;agronomy, or soil science, is split in two, with Brazilian journals (in Portuguese) appearing insular and cut off from the rest of the network.&lt;/li&gt;
+&lt;li&gt;archaeology doesn&amp;rsquo;t form a single field&amp;mdash;rather it is two distinct sub-fields, with US-style anthropological archaeology falling under social sciences, whereas osteoarchaeology (digging up bones and stuff) lives under geosciences.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Other observations:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;statistics is great&lt;/li&gt;
+&lt;li&gt;nobody understands particle physics&lt;/li&gt;
+&lt;li&gt;the data, which are from 2015, also effectively &amp;lsquo;predict&amp;rsquo; &lt;a href=&#34;https://springerplus.springeropen.com/&#34;&gt;&lt;em&gt;SpringerPlus&lt;/em&gt;&lt;/a&gt; closing down in 2016&lt;/li&gt;
+&lt;li&gt;Stata is used mainly by non-statisticians&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The analysis was done using R and the visualisation created using D3.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://selbydavid.com/influence/analysis.html&#34;&gt;Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://selbydavid.com/influence/influence.js&#34;&gt;D3 code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I am not very good at coming up with names for algorithmically-generated fields, so if you can think of more appropriate labels for communities, do let me know.
+Feedback is very welcome!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://selbydavid.com/influence/&#34;&gt;Click here&lt;/a&gt; to view the visualisation.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Building a neural network from scratch in R</title>
+      <link>https://selbydavid.com/2018/01/09/neural-network/</link>
+      <pubDate>Tue, 09 Jan 2018 10:00:00 +0000</pubDate>
+      
+      <guid>https://selbydavid.com/2018/01/09/neural-network/</guid>
+      <description>&lt;p&gt;Neural networks can seem like a bit of a black box. But in some ways, a neural network is little more than several &lt;a href=&#34;https://en.wikipedia.org/wiki/Logistic_regression&#34;&gt;logistic regression&lt;/a&gt; models chained together.&lt;/p&gt;
+&lt;p&gt;In this post I will show you how to derive a neural network from scratch with just a few lines in R. If you don’t like mathematics, feel free to skip to the code chunks towards the end.&lt;/p&gt;
+&lt;p&gt;This blog post is partly inspired by Denny Britz’s article, &lt;a href=&#34;http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/&#34;&gt;Implementing a Neural Network from Scratch in Python&lt;/a&gt;, as well as &lt;a href=&#34;https://www.analyticsvidhya.com/blog/2017/05/neural-network-from-scratch-in-python-and-r/&#34;&gt;this article by Sunil Ray&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&#34;logistic-regression&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Logistic regression&lt;/h2&gt;
+&lt;p&gt;What’s a logistic regression model? Suppose we want to build a machine that classifies objects in two groups, for example &lt;a href=&#34;https://www.youtube.com/watch?v=ACmydtFDTGs&#34;&gt;‘hot dog’ and ‘not hot dog’&lt;/a&gt;. We will say &lt;span class=&#34;math inline&#34;&gt;\(Y_i = 1\)&lt;/span&gt; if object &lt;em&gt;i&lt;/em&gt; is a hot dog, and &lt;span class=&#34;math inline&#34;&gt;\(Y_i = 0\)&lt;/span&gt; otherwise.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=ACmydtFDTGs&#34;&gt;&lt;img src=&#34;https://selbydavid.com/img/2018/hotdog.gif&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A logistic regression model estimates these odds, &lt;span class=&#34;math display&#34;&gt;\[
+\operatorname{odds}(Y = 1)
+= \frac{\operatorname P(Y = 1)} {\operatorname P(Y = 0)}
+= \frac{\operatorname P(Y = 1)} {\operatorname 1 - \operatorname P(Y = 1)}
+\]&lt;/span&gt; and for mathematical and computational reasons we take the natural logarithm of the same—the log odds. As a &lt;a href=&#34;https://en.wikipedia.org/wiki/Generalized_linear_model&#34;&gt;generalised linear model&lt;/a&gt;, the response (the log odds) is a linear combination of the parameters and the covariates, &lt;span class=&#34;math display&#34;&gt;\[\operatorname{log-odds}(Y = 1) = X \beta,\]&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; is the &lt;a href=&#34;https://en.wikipedia.org/wiki/Design_matrix&#34;&gt;design matrix&lt;/a&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; is a vector of parameters to be found.&lt;/p&gt;
+&lt;p&gt;Classical statistical inference involves looking for a parameter estimate, &lt;span class=&#34;math inline&#34;&gt;\(\hat\beta\)&lt;/span&gt;, that &lt;a href=&#34;https://en.wikipedia.org/wiki/Maximum_likelihood_estimation&#34;&gt;maximises the likelihood&lt;/a&gt; of the observations given the parameters. For our hot dog classification problem, the likelihood function is &lt;span class=&#34;math display&#34;&gt;\[\mathcal{L} = \prod_i \operatorname P(Y_i=1)^{y_i} \operatorname P(Y_i = 0)^{1 - y_i}\]&lt;/span&gt; or, taking logs, &lt;span class=&#34;math display&#34;&gt;\[\log \mathcal{L} = \sum_i \Bigl[ y_i \log \operatorname P(Y_i = 1) + (1-y_i) \log \operatorname P(Y_i = 0) \Bigr]. \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let’s imagine we have been given some two-dimensional data about a sample of objects, along with their labels. Our sample data set includes 200 observations. Here is a random sample of five:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;x1&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;x2&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;class&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;8.81&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-6.19&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;not hot dog&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.84&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;not hot dog&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;-1.78&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.48&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;hot dog&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;6.83&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.02&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;hot dog&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1.71&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-10.29&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;not hot dog&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;And a scatter plot of all of them:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2018-01-09-neural-network_files/figure-html/plot-spirals-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Fitting a logistic regression model in R is easy:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;logreg &amp;lt;- glm(class ~ x1 + x2, family = binomial, data = hotdogs)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But as the decision boundary can only be linear, it doesn’t work too well at distinguishing our two classes. Logistic regression classifies 134 (67%) of our objects correctly.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2018-01-09-neural-network_files/figure-html/logistic-boundary-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Nonlinearity is where neural networks are useful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;artificial-neural-networks&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Artificial neural networks&lt;/h2&gt;
+&lt;p&gt;An &lt;a href=&#34;https://en.wikipedia.org/wiki/Artificial_neural_network&#34;&gt;artificial neural network&lt;/a&gt; is so called because once upon a time it was thought to be a good model for how neurons in the brain work. Apparently it isn’t, but the name has stuck.&lt;/p&gt;
+&lt;p&gt;Suppose we have some inputs, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf x\)&lt;/span&gt;, and known outputs &lt;span class=&#34;math inline&#34;&gt;\(\mathbf y\)&lt;/span&gt;. Then the aim of the game is to find a way of estimating &lt;span class=&#34;math inline&#34;&gt;\(\mathbf y\)&lt;/span&gt; based on &lt;span class=&#34;math inline&#34;&gt;\(\mathbf x\)&lt;/span&gt;. In a way, then, a neural network is like any other regression or classification model.&lt;/p&gt;
+&lt;p&gt;Neural networks (for classification, at least) are also known as multi-layer &lt;a href=&#34;https://en.wikipedia.org/wiki/Perceptron&#34;&gt;perceptrons&lt;/a&gt;. Like ogres and onions, they have layers—three to be exact.&lt;/p&gt;
+&lt;p&gt;The output layer is our estimate of the probability that objects belong to each class. The input layer comprises the covariates and an intercept, as before. In the middle, there is a &lt;em&gt;hidden layer&lt;/em&gt;, which is a transformation of the input space into &lt;span class=&#34;math inline&#34;&gt;\(h\)&lt;/span&gt; dimensions, where &lt;span class=&#34;math inline&#34;&gt;\(h\)&lt;/span&gt; is a number chosen by us. We then perform a logistic regression on this transformed space to estimate the classes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2018-01-09-neural-network_files/figure-html/neural-network-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It works like this.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Generate &lt;span class=&#34;math inline&#34;&gt;\(h\)&lt;/span&gt; different linear combinations of the input variables.&lt;/li&gt;
+&lt;li&gt;Apply an ‘activation’ function, that for each observation, turns each hidden node ‘on’ or ‘off’.&lt;/li&gt;
+&lt;li&gt;Fit a logistic regression model to these &lt;span class=&#34;math inline&#34;&gt;\(h\)&lt;/span&gt; transformed predictors, plus an intercept.&lt;/li&gt;
+&lt;li&gt;Adjust the parameters of both the input and the output to maximise likelihood.&lt;/li&gt;
+&lt;li&gt;Repeat, &lt;em&gt;ad nauseum&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If &lt;span class=&#34;math inline&#34;&gt;\(h = 1\)&lt;/span&gt; then there is only one linear combination of the predictors, which is effectively the same thing as having no hidden layer at all, i.e. ordinary logistic regression.&lt;/p&gt;
+&lt;p&gt;So we run a kind of logistic regression model on the inputs to generate a transformation of the feature space, then once more to classify our actual objects. Each iteration of the fitting or ‘training’ process adjusts both the transformation and the regression parameters.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;hidden-layers&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Hidden layers&lt;/h2&gt;
+&lt;p&gt;The input layer is a design matrix, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf X = \begin{bmatrix}\mathbf 1 &amp;amp; \mathbf x\end{bmatrix}\)&lt;/span&gt;. The output layer is a vector of estimated probabilities, &lt;span class=&#34;math inline&#34;&gt;\(\hat {\mathbf y}\)&lt;/span&gt;. So far, this is exactly like our logistic regression model above.&lt;/p&gt;
+&lt;p&gt;A neural network adds a hidden layer, which you might think of as an intermediate design matrix between the inputs and the outputs. &lt;a href=&#34;https://en.wikipedia.org/wiki/Deep_learning&#34;&gt;Deep learning&lt;/a&gt; is just a neural network with multiple hidden layers.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:node-diagram&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;https://selbydavid.com/post/2018-01-09-neural-network_files/figure-html/node-diagram-1.svg&#34; alt=&#34;Multi-layer perceptron with five hidden nodes&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Multi-layer perceptron with five hidden nodes
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;If there are &lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt; input variables then there are &lt;span class=&#34;math inline&#34;&gt;\(d+1\)&lt;/span&gt; input nodes—one for each covariate, plus an intercept, or ‘bias’ (because computer scientists like having separate names for everything).&lt;/p&gt;
+&lt;p&gt;In general there are &lt;span class=&#34;math inline&#34;&gt;\(k-1\)&lt;/span&gt; output nodes, where &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; is the number of possible classes. The &lt;span class=&#34;math inline&#34;&gt;\(k^\text{th}\)&lt;/span&gt; node would be the same as ‘none of the above’, so it is redundant. In a binary classification problem like ours, there is just one output node, because &lt;span class=&#34;math inline&#34;&gt;\(\operatorname P(Y=0) = 1 - \operatorname P(Y=1)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;There are &lt;span class=&#34;math inline&#34;&gt;\(h\)&lt;/span&gt; nodes in the hidden layer, plus an intercept. Each of these is a linear combination of the inputs, passed through an &lt;a href=&#34;https://en.wikipedia.org/wiki/Activation_function&#34;&gt;&lt;em&gt;activation function&lt;/em&gt;&lt;/a&gt;. The intercept does not depend on the nodes in the previous layer&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The activation function is often (not always) chosen to be the &lt;em&gt;sigmoid function&lt;/em&gt;, another name for the &lt;em&gt;logistic function&lt;/em&gt;, &lt;span class=&#34;math display&#34;&gt;\[\sigma(x) = \frac 1 {1 + e^{-x}},\]&lt;/span&gt; the inverse of the logit &lt;span class=&#34;math display&#34;&gt;\[\operatorname{logit}(x) = \log \left( \frac{x}{1-x} \right).\]&lt;/span&gt; If &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is a probability of an event, then &lt;span class=&#34;math inline&#34;&gt;\(\operatorname{logit}(x)\)&lt;/span&gt; is its log odds.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;forward-propagation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Forward propagation&lt;/h2&gt;
+&lt;p&gt;Starting with the inputs, we &lt;a href=&#34;https://en.wikipedia.org/wiki/Feedforward_neural_network&#34;&gt;feed forward&lt;/a&gt; through the network as follows.&lt;/p&gt;
+&lt;p&gt;Firstly, compute a linear combination of the covariates, using some weight matrix &lt;span class=&#34;math inline&#34;&gt;\(\mathbf W_\text{in} \in \mathbb R^{(d+1) \times h}\)&lt;/span&gt;. &lt;span class=&#34;math display&#34;&gt;\[
+\mathbf z_1
+= \mathbf{XW}_\text{in}
+= \begin{bmatrix}\mathbf 1 &amp;amp; \mathbf x\end{bmatrix} \mathbf W_\text{in}
+\]&lt;/span&gt; Next, apply an activation function to obtain the nodes in the hidden layer. The hidden layer &lt;span class=&#34;math inline&#34;&gt;\(\mathbf H\)&lt;/span&gt; might be thought of as a design matrix containing the output of a logistic regression classifying whether each node is ‘activated’ or not. &lt;span class=&#34;math display&#34;&gt;\[\mathbf h = \sigma(\mathbf z_1)\]&lt;/span&gt; The intercept/bias is always activated, so it is fixed to be a vector of ones. &lt;span class=&#34;math display&#34;&gt;\[\mathbf H = \begin{bmatrix} \mathbf 1 &amp;amp; \mathbf h \end{bmatrix}
+            = \begin{bmatrix} \mathbf 1 &amp;amp; \sigma(\mathbf z_1) \end{bmatrix}
+            = \begin{bmatrix} \mathbf 1 &amp;amp; \sigma(\mathbf {XW}_\text{in}) \end{bmatrix}\]&lt;/span&gt; For the output layer, compute a linear combination of the hidden variables, this time using another weight matrix, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{W}_\text{out} \in \mathbb R^{(h+1) \times (k-1)}\)&lt;/span&gt;. &lt;span class=&#34;math display&#34;&gt;\[\mathbf z_2
+= \mathbf {HW}_\text{out}
+= \begin{bmatrix} \mathbf 1 &amp;amp; \mathbf h\end{bmatrix} \mathbf W_\text{out}
+\]&lt;/span&gt; Apply one more function to get the output &lt;span class=&#34;math display&#34;&gt;\[\hat {\mathbf y} = \sigma (\mathbf z_2),\]&lt;/span&gt; which is a probability vector, &lt;span class=&#34;math inline&#34;&gt;\(\hat Y_i = \operatorname P(Y_i = 1)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Putting it all together, &lt;span class=&#34;math display&#34;&gt;\[\hat {\mathbf y}
+= \sigma \left( \mathbf {H W} _ \text{out} \right)
+= \sigma \bigl( \begin{bmatrix} \mathbf 1 &amp;amp; \sigma ( \mathbf {X W} _ \text{in} ) \end{bmatrix} \mathbf W _ \text{out} \bigr).\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;It is straightforward to write a function to perform the forward propagation process in R. Just do&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;feedforward &amp;lt;- function(x, w1, w2) {
+  z1 &amp;lt;- cbind(1, x) %*% w1
+  h &amp;lt;- sigmoid(z1)
+  z2 &amp;lt;- cbind(1, h) %*% w2
+  list(output = sigmoid(z2), h = h)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sigmoid &amp;lt;- function(x) 1 / (1 + exp(-x))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where do we get the weights from? On the first iteration, they can be random. Then we have to make them better.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;back-propagation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Back propagation&lt;/h2&gt;
+&lt;p&gt;So far we have been taking the parameters, or weights, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf W_\text{in}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf W_\text{out}\)&lt;/span&gt;, for granted.&lt;/p&gt;
+&lt;p&gt;Like parameters in a linear regression, we need to choose weights that make our model ‘better’ by some criterion. Neural network enthusiasts will say that we will train our multilayer perceptron by minimising the cross entropy loss. That’s a fancy way of saying we fit the model using maximum likelihood.&lt;/p&gt;
+&lt;p&gt;The log-likelihood for a binary classifier is &lt;span class=&#34;math display&#34;&gt;\[\ell = \sum_i \Bigl( y_i \log \hat y_i + (1 - y_i) \log (1 - \hat y_i) \Bigr).\]&lt;/span&gt; We can maximise this via &lt;a href=&#34;https://en.wikipedia.org/wiki/Gradient_descent&#34;&gt;gradient descent&lt;/a&gt;, a general-purpose optimisation algorithm.&lt;/p&gt;
+&lt;p&gt;To minimise &lt;span class=&#34;math inline&#34;&gt;\(\ell = f(\mathbf W)\)&lt;/span&gt; via gradient descent, we iterate using the formula &lt;span class=&#34;math display&#34;&gt;\[\mathbf W_{t+1} = \mathbf W_{t} - \gamma \cdot \nabla f(\mathbf W_{t}),\]&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf W_t\)&lt;/span&gt; is the weight matrix at time &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\nabla f\)&lt;/span&gt; is the gradient of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; with respect to &lt;span class=&#34;math inline&#34;&gt;\(\mathbf W\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\gamma\)&lt;/span&gt; is the ‘learning rate’.&lt;/p&gt;
+&lt;p&gt;Choose a learning rate too high and the algorithm will leap around like a dog chasing a squirrel, going straight past the optimum; choose one too low and it will take forever, making mountains out of molehills.&lt;/p&gt;
+&lt;p&gt;Using the &lt;a href=&#34;https://en.wikipedia.org/wiki/Chain_rule&#34;&gt;chain rule&lt;/a&gt;, the gradient of the log-likehood with respect to the output weights is given by &lt;span class=&#34;math display&#34;&gt;\[\frac {\partial\ell} {\partial \mathbf W_\text{out}} =
+\frac{\partial \ell}{\partial \hat {\mathbf y}}
+\frac{\partial \hat {\mathbf y} }{\partial \mathbf W_\text{out}}\]&lt;/span&gt; where &lt;span class=&#34;math display&#34;&gt;\[\begin{aligned}
+\frac{\partial\ell}{\partial \hat{\mathbf y}}
+  &amp;amp;=  \frac{\mathbf y}{\hat{\mathbf y}} - \frac{1 - \mathbf y}{1 - \hat{\mathbf y}}
+  = \frac{\hat{\mathbf y} - \mathbf y}{\hat{\mathbf y}(1 - \hat{\mathbf y})},\\
+\frac{\partial\hat{\mathbf y}}{\partial \mathbf W_\text{out}}
+  &amp;amp;=  \mathbf{H}^T \sigma(\mathbf {HW}_\text{out})\bigl( 1 - \sigma(\mathbf{HW}_\text{out}) \bigr) \\
+  &amp;amp;= \mathbf H^T \hat {\mathbf y} (1 - \hat{\mathbf y}).
+\end{aligned}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And the gradient with respect to the input weights is &lt;span class=&#34;math display&#34;&gt;\[
+\frac {\partial\ell} {\partial \mathbf W_\text{in}}
+= \frac{\partial \ell}{\partial \hat {\mathbf y} }
+   \frac{\partial \hat {\mathbf y} }{\partial \mathbf H}
+   \frac{\partial \mathbf H}{\partial \mathbf W_\text{in}}
+\]&lt;/span&gt; where &lt;span class=&#34;math display&#34;&gt;\[
+\begin{aligned}
+\frac{\partial \hat{\mathbf y}}{\partial \mathbf H}
+  &amp;amp;=  \sigma(\mathbf{HW}_\text{out}) \bigl( 1 - \sigma(\mathbf{HW}_\text{out}) \bigr) \mathbf W_\text{out}^T \\
+  &amp;amp;= \hat{\mathbf y} (1 - \hat{\mathbf y}) \mathbf W_\text{out}^T, \\
+\frac{\partial \mathbf H}{\partial \mathbf W_\text{in}}
+  &amp;amp;= \mathbf X^T \begin{bmatrix} \mathbf 0 &amp;amp; \sigma(\mathbf{XW}_\text{in})\bigl( 1 - \sigma(\mathbf{XW}_\text{in}) \bigr) \end{bmatrix}.
+\end{aligned}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In the last step, we take for granted that the intercept column of &lt;span class=&#34;math inline&#34;&gt;\(\mathbf H\)&lt;/span&gt; doesn’t depend on &lt;span class=&#34;math inline&#34;&gt;\(\mathbf W_\text{in}\)&lt;/span&gt;, but you could parametrise it differently (&lt;a href=&#34;#fn1&#34;&gt;see footnotes&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;A simple R implementation is as follows.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;backpropagate &amp;lt;- function(x, y, y_hat, w1, w2, h, learn_rate) {
+  dw2 &amp;lt;- t(cbind(1, h)) %*% (y_hat - y)
+  dh  &amp;lt;- (y_hat - y) %*% t(w2[-1, , drop = FALSE])
+  dw1 &amp;lt;- t(cbind(1, x)) %*% (h * (1 - h) * dh)
+  
+  w1 &amp;lt;- w1 - learn_rate * dw1
+  w2 &amp;lt;- w2 - learn_rate * dw2
+  
+  list(w1 = w1, w2 = w2)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;training-the-network&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Training the network&lt;/h2&gt;
+&lt;p&gt;Training is just a matter of initialising the weights, propagating forward to get an output estimate, then propagating the error backwards to update the weights towards a better solution. Then iteratively propagate forwards and backwards until the Earth has been swallowed by the Sun, or some other stopping criterion.&lt;/p&gt;
+&lt;p&gt;Here is a quick implementation using the functions defined above.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;train &amp;lt;- function(x, y, hidden = 5, learn_rate = 1e-2, iterations = 1e4) {
+  d &amp;lt;- ncol(x) + 1
+  w1 &amp;lt;- matrix(rnorm(d * hidden), d, hidden)
+  w2 &amp;lt;- as.matrix(rnorm(hidden + 1))
+  for (i in 1:iterations) {
+    ff &amp;lt;- feedforward(x, w1, w2)
+    bp &amp;lt;- backpropagate(x, y,
+                        y_hat = ff$output,
+                        w1, w2,
+                        h = ff$h,
+                        learn_rate = learn_rate)
+    w1 &amp;lt;- bp$w1; w2 &amp;lt;- bp$w2
+  }
+  list(output = ff$output, w1 = w1, w2 = w2)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s &lt;code&gt;train&lt;/code&gt; a neural network with five hidden nodes (like in Figure 1) on the hot dogs data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x &amp;lt;- data.matrix(hotdogs[, c(&amp;#39;x1&amp;#39;, &amp;#39;x2&amp;#39;)])
+y &amp;lt;- hotdogs$class == &amp;#39;hot dog&amp;#39;
+nnet5 &amp;lt;- train(x, y, hidden = 5, iterations = 1e5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On my desktop PC, it takes about 12 seconds for the above code to run the 100,000 iterations. Not too bad for what sounds like a lot of runs, but what are the results like?&lt;/p&gt;
+&lt;p&gt;We can calculate how many objects it classified correctly:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean((nnet5$output &amp;gt; .5) == y)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.76&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That’s 76%, or 152 out of 200 objects in the right class.&lt;/p&gt;
+&lt;p&gt;Let’s draw a picture to see what the decision boundaries look like. To do that, we firstly make a grid of points around the input space:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grid &amp;lt;- expand.grid(x1 = seq(min(hotdogs$x1) - 1,
+                             max(hotdogs$x1) + 1,
+                             by = .25),
+                    x2 = seq(min(hotdogs$x2) - 1,
+                             max(hotdogs$x2) + 1,
+                             by = .25))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then feed these points forward through our trained neural network.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ff_grid &amp;lt;- feedforward(x = data.matrix(grid[, c(&amp;#39;x1&amp;#39;, &amp;#39;x2&amp;#39;)]),
+                       w1 = nnet5$w1,
+                       w2 = nnet5$w2)
+grid$class &amp;lt;- factor((ff_grid$output &amp;gt; .5) * 1,
+                     labels = levels(hotdogs$class))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, using &lt;code&gt;ggplot2&lt;/code&gt;, we plot the predicted classes on a grid behind the observed points.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(hotdogs) + aes(x1, x2, colour = class) +
+  geom_point(data = grid, size = .5) +
+  geom_point() +
+  labs(x = expression(x[1]), y = expression(x[2]))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2018-01-09-neural-network_files/figure-html/plot-ad-hoc-1.png&#34; width=&#34;672&#34; /&gt; The regions the neural network has classified into ‘hot dog’ and ‘not hot dog’ can no longer be separated by a single straight line. The more nodes we add to the hidden layer, the more elaborate the decision boundaries can become, improving accuracy at the expense of computation time (as more weights must be calculated) and increased risk of &lt;a href=&#34;https://en.wikipedia.org/wiki/Overfitting&#34;&gt;over-fitting&lt;/a&gt; the data.&lt;/p&gt;
+&lt;p&gt;How about 30 nodes?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nnet30 &amp;lt;- train(x, y, hidden = 30, iterations = 1e5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After 100,000 iterations, accuracy is 100%. The decision boundary looks much smoother:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2018-01-09-neural-network_files/figure-html/plot-30-nodes-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And for completeness, let’s see what one hidden node (plus an intercept) gives us.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;nnet1 &amp;lt;- train(x, y, hidden = 1, iterations = 1e5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2018-01-09-neural-network_files/figure-html/plot-1-node-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Much worse accuracy—68%—and the decision boundary looks linear.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r6-class-implementation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R6 class implementation&lt;/h2&gt;
+&lt;p&gt;The above code works, mathematically, but isn’t the most elegant solution from a user interface point of view. It’s a bit ad hoc. One of the annoying things about writing R functions is that, unless you use the global assignment operator (&lt;code&gt;&amp;lt;&amp;lt;-&lt;/code&gt;) then the arguments are &lt;a href=&#34;https://en.wikipedia.org/wiki/Immutable_object&#34;&gt;immutable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Also, everything defined within the function scope is discarded. You can return the objects in a list, but this can be unwieldy and you have to extract each object one by one to pass into the arguments of the next function. And despite this we still have three functions and various objects cluttering the workspace.&lt;/p&gt;
+&lt;p&gt;Can we do better? A more flexible implementation is object orientated, using &lt;a href=&#34;https://cran.r-project.org/package=R6&#34;&gt;&lt;code&gt;R6&lt;/code&gt; classes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The following class not only supports binary classification but also &lt;a href=&#34;https://en.wikipedia.org/wiki/Multinomial_logistic_regression&#34;&gt;multinomial logistic regression&lt;/a&gt;, providing a high-level formula interface like that used when fitting an &lt;code&gt;lm&lt;/code&gt; or &lt;code&gt;glm&lt;/code&gt; with the &lt;code&gt;stats&lt;/code&gt; package.&lt;/p&gt;
+&lt;p&gt;The maths for multi-class classification is very similar (partly thanks to the derivative of the &lt;a href=&#34;https://en.wikipedia.org/wiki/Softmax_function&#34;&gt;softmax function&lt;/a&gt;—the multivariate generalisation of sigmoid—cancelling out in the gradient calculation) and most of the modifications are to do with wrangling R factors to and from indicator matrix representation.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(R6)
+NeuralNetwork &amp;lt;- R6Class(&amp;quot;NeuralNetwork&amp;quot;,
+  public = list(
+    X = NULL,  Y = NULL,
+    W1 = NULL, W2 = NULL,
+    output = NULL,
+    initialize = function(formula, hidden, data = list()) {
+      # Model and training data
+      mod &amp;lt;- model.frame(formula, data = data)
+      self$X &amp;lt;- model.matrix(attr(mod, &amp;#39;terms&amp;#39;), data = mod)
+      self$Y &amp;lt;- model.response(mod)
+      
+      # Dimensions
+      D &amp;lt;- ncol(self$X) # input dimensions (+ bias)
+      K &amp;lt;- length(unique(self$Y)) # number of classes
+      H &amp;lt;- hidden # number of hidden nodes (- bias)
+      
+      # Initial weights and bias
+      self$W1 &amp;lt;- .01 * matrix(rnorm(D * H), D, H)
+      self$W2 &amp;lt;- .01 * matrix(rnorm((H + 1) * K), H + 1, K)
+    },
+    fit = function(data = self$X) {
+      h &amp;lt;- self$sigmoid(data %*% self$W1)
+      score &amp;lt;- cbind(1, h) %*% self$W2
+      return(self$softmax(score))
+    },
+    feedforward = function(data = self$X) {
+      self$output &amp;lt;- self$fit(data)
+      invisible(self)
+    },
+    backpropagate = function(lr = 1e-2) {
+      h &amp;lt;- self$sigmoid(self$X %*% self$W1)
+      Yid &amp;lt;- match(self$Y, sort(unique(self$Y)))
+      
+      haty_y &amp;lt;- self$output - (col(self$output) == Yid) # E[y] - y
+      dW2 &amp;lt;- t(cbind(1, h)) %*% haty_y
+      
+      dh &amp;lt;- haty_y %*% t(self$W2[-1, , drop = FALSE])
+      dW1 &amp;lt;- t(self$X) %*% (self$dsigmoid(h) * dh)
+      
+      self$W1 &amp;lt;- self$W1 - lr * dW1
+      self$W2 &amp;lt;- self$W2 - lr * dW2
+      
+      invisible(self)
+    },
+    predict = function(data = self$X) {
+      probs &amp;lt;- self$fit(data)
+      preds &amp;lt;- apply(probs, 1, which.max)
+      levels(self$Y)[preds]
+    },
+    compute_loss = function(probs = self$output) {
+      Yid &amp;lt;- match(self$Y, sort(unique(self$Y)))
+      correct_logprobs &amp;lt;- -log(probs[cbind(seq_along(Yid), Yid)])
+      sum(correct_logprobs)
+    },
+    train = function(iterations = 1e4,
+                     learn_rate = 1e-2,
+                     tolerance = .01,
+                     trace = 100) {
+      for (i in seq_len(iterations)) {
+        self$feedforward()$backpropagate(learn_rate)
+        if (trace &amp;gt; 0 &amp;amp;&amp;amp; i %% trace == 0)
+          message(&amp;#39;Iteration &amp;#39;, i, &amp;#39;\tLoss &amp;#39;, self$compute_loss(),
+                  &amp;#39;\tAccuracy &amp;#39;, self$accuracy())
+        if (self$compute_loss() &amp;lt; tolerance) break
+      }
+      invisible(self)
+    },
+    accuracy = function() {
+      predictions &amp;lt;- apply(self$output, 1, which.max)
+      predictions &amp;lt;- levels(self$Y)[predictions]
+      mean(predictions == self$Y)
+    },
+    sigmoid = function(x) 1 / (1 + exp(-x)),
+    dsigmoid = function(x) x * (1 - x),
+    softmax = function(x) exp(x) / rowSums(exp(x))
+  )
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What do each of the methods do?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;initialize&lt;/code&gt; is run every time you make a new network. It initialises the weight matrices to be the correct dimensions, populated with random initial values.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fit&lt;/code&gt; runs one step of forward propagation but returns the result instead of storing it. Useful for predicting from new test data without changing the model.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;feedforward&lt;/code&gt; runs &lt;code&gt;fit&lt;/code&gt; but saves the results, for training.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;backpropagate&lt;/code&gt; does what you might expect, saving the results for training.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;train&lt;/code&gt; runs forward and back propagation, storing the results and printing the progress to the console every &lt;code&gt;trace&lt;/code&gt; iterations.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;predict&lt;/code&gt; uses argmax to estimate a single discrete class for each observation (whereas &lt;code&gt;fit&lt;/code&gt; only returns probabilities).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;accuracy&lt;/code&gt; and &lt;code&gt;compute_loss&lt;/code&gt; return the proportion of correct class assignments and the negative log likelihood (‘log loss’), respectively&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sigmoid&lt;/code&gt;, &lt;code&gt;dsigmoid&lt;/code&gt; and &lt;code&gt;softmax&lt;/code&gt; are utility functions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let’s see our fancy neural network in action on the famous &lt;a href=&#34;https://en.wikipedia.org/wiki/Iris_flower_data_set&#34;&gt;iris data set&lt;/a&gt;. Firstly, initialise the network by specifying the input and output variables and the number of hidden nodes. (Let’s go for five.)&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;irisnet &amp;lt;- NeuralNetwork$new(Species ~ ., data = iris, hidden = 5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I have implemented a formula interface so I can regress &lt;code&gt;Species&lt;/code&gt; on the other four variables (&lt;code&gt;Petal.Length&lt;/code&gt;, &lt;code&gt;Petal.Width&lt;/code&gt;, &lt;code&gt;Sepal.Length&lt;/code&gt; and &lt;code&gt;Sepal.Width&lt;/code&gt;) without having to type it out in full.&lt;/p&gt;
+&lt;p&gt;That’s the framework assembled. Now we can train the model. No need to assign any new variables—the R6 object modifies itself in place.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;irisnet$train(9999, trace = 1e3, learn_rate = .0001)
+## Iteration 1000   Loss 151.054969487204   Accuracy 0.68
+## Iteration 2000   Loss 81.6280605667542   Accuracy 0.853333333333333
+## Iteration 3000   Loss 64.5735942975868   Accuracy 0.966666666666667
+## Iteration 4000   Loss 51.0996158369837   Accuracy 0.973333333333333
+## Iteration 5000   Loss 40.105949050699    Accuracy 0.973333333333333
+## Iteration 6000   Loss 32.3280157122779   Accuracy 0.973333333333333
+## Iteration 7000   Loss 27.0449301604686   Accuracy 0.98
+## Iteration 8000   Loss 23.3961690114  Accuracy 0.98
+## Iteration 9000   Loss 20.7875204792586   Accuracy 0.98&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You might notice that the log loss is going down even while accuracy stays the same. This is because the model is becoming more or less confident about each of its predictions, even if the argmax doesn’t change.&lt;/p&gt;
+&lt;p&gt;Everything is stored inside the &lt;code&gt;NeuralNetwork&lt;/code&gt; object.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;irisnet&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;lt;NeuralNetwork&amp;gt;
+##   Public:
+##     accuracy: function () 
+##     backpropagate: function (lr = 0.01) 
+##     clone: function (deep = FALSE) 
+##     compute_loss: function (probs = self$output) 
+##     dsigmoid: function (x) 
+##     feedforward: function (data = self$X) 
+##     fit: function (data = self$X) 
+##     initialize: function (formula, hidden, data = list()) 
+##     output: 0.968263186096496 0.962577356981835 0.965919909020745 0. ...
+##     predict: function (data = self$X) 
+##     sigmoid: function (x) 
+##     softmax: function (x) 
+##     train: function (iterations = 10000, learn_rate = 0.01, tolerance = 0.01, 
+##     W1: 0.535763605328154 1.04640352732849 1.11188605221437 -1.7 ...
+##     W2: -0.412354248171205 2.04939691705817 -1.70485310730503 -3 ...
+##     X: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  ...
+##     Y: setosa setosa setosa setosa setosa setosa setosa setosa  ...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;One other nice thing about R6 classes is you can chain methods together where they return &lt;code&gt;self&lt;/code&gt; or &lt;code&gt;invisible(self)&lt;/code&gt;. So if I want to train for 1000 iterations and then predict for some new data, all in one line, it’s as simple as&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;irisnet$train(1000)$predict(newdata)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are plenty of improvements we could make to the &lt;code&gt;NeuralNetwork&lt;/code&gt; class but most of them are beyond the scope of this article, and left as an exercise to the interested reader. Here are some ideas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;user-selectable activation functions, rather than hard-coded sigmoid&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Regularization_(mathematics)&#34;&gt;regularisation&lt;/a&gt;, and including regularisation loss as part of &lt;code&gt;compute_loss()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;arbitrary number of hidden layers, to enable deep learning (multiple hidden layers) or logistic regression (no hidden layer)&lt;/li&gt;
+&lt;li&gt;regression as well as classification&lt;/li&gt;
+&lt;li&gt;more intelligent initial weights&lt;/li&gt;
+&lt;li&gt;changing learning rate over time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But you might be wondering: can I actually classify pictures of hot dogs with this? Probably not from raw pixels—image analysis is usually a job for a &lt;a href=&#34;https://en.wikipedia.org/wiki/Convolutional_neural_network&#34;&gt;convolutional neural network&lt;/a&gt;, which is a more advanced topic for another day.&lt;/p&gt;
+&lt;p&gt;For further reading, try &lt;a href=&#34;http://www.deeplearningbook.org/&#34;&gt;Chapter 6 of &lt;em&gt;Deep Learning&lt;/em&gt;&lt;/a&gt; (2016) by Goodfellow, Bengio and Courville.&lt;/p&gt;
+&lt;p&gt;I hope you found this useful! Let me know if anything is unclear. Full source code for this post is available &lt;a href=&#34;https://github.com/Selbosh/selbosh.github.io/blob/source/content/post/2018-01-09-neural-network.Rmd&#34;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;If you wanted to be very general, then you could say the bias &lt;em&gt;does&lt;/em&gt; depend on the previous layer, but the respective weight is fixed at zero. Then the weighted sum would be zero and &lt;span class=&#34;math inline&#34;&gt;\(\sigma(0) = 1\)&lt;/span&gt;, so you get a vector of ones.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Using R on Android</title>
-      <link>http://selbydavid.com/2017/12/29/r-android/</link>
+      <link>https://selbydavid.com/2017/12/29/r-android/</link>
       <pubDate>Fri, 29 Dec 2017 15:00:00 +0000</pubDate>
       
-      <guid>http://selbydavid.com/2017/12/29/r-android/</guid>
+      <guid>https://selbydavid.com/2017/12/29/r-android/</guid>
       <description>
 
 &lt;p&gt;I just discovered a way to get R running on my smartphone, with full support for packages, graphics and &lt;a href=&#34;http://rmarkdown.rstudio.com/&#34;&gt;R Markdown&lt;/a&gt;, and no need to connect to an external server.
@@ -42,7 +465,7 @@ It just works.&lt;/p&gt;
 &lt;p&gt;GNUroot Debian emulates a command line interface or &amp;ldquo;X Terminal&amp;rdquo; like on a regular desktop PC.
 You can work in multiple windows, and you have access to all the files on your Android system.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/gnuroot.png&#34; alt=&#34;GNUroot Debian&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/gnuroot.png&#34; alt=&#34;GNUroot Debian&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can use it not only to run R on your phone, but also Python or any other command-line tools supported by GNU/Linux.&lt;/p&gt;
 
@@ -70,7 +493,7 @@ apt-get install r-base r-base-dev
 This is just like the usual interactive R user interface (because it &lt;em&gt;is&lt;/em&gt; the usual interface).
 Run commands and load and install packages to your heart&amp;rsquo;s content.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/interactiveR.png&#34; alt=&#34;Interactive R session in GNUroot Debian&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/interactiveR.png&#34; alt=&#34;Interactive R session in GNUroot Debian&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;To quit R and return to the Linux command line, type&lt;/p&gt;
 
@@ -98,7 +521,7 @@ R -e &amp;quot;print(&#39;Hello, world&#39;)&amp;quot;
 &lt;p&gt;Pressing Up and Down on your keyboard lets you cycle through recently used commands, saving you from needing to retype repeated or very similar commands.
 Usually touch-screen keyboards don&amp;rsquo;t have arrow keys, but you can install the &lt;a href=&#34;https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard&#34;&gt;Hacker&amp;rsquo;s Keyboard&lt;/a&gt; for Android, which does (at least in landscape mode).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/hackers-keyboard.png&#34; alt=&#34;Hacker&#39;s Keyboard&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/hackers-keyboard.png&#34; alt=&#34;Hacker&#39;s Keyboard&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;running-scripts&#34;&gt;Running scripts&lt;/h2&gt;
 
@@ -140,7 +563,7 @@ cat(x, y, sep = &#39;, &#39;)
 
 &lt;p&gt;for more detailed output.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/Rscript.png&#34; alt=&#34;Evaluating an R script on Android&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/Rscript.png&#34; alt=&#34;Evaluating an R script on Android&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you prefer working in R to in a Linux terminal, then you can equivalently do everything within an R session:&lt;/p&gt;
 
@@ -176,7 +599,7 @@ dev.off()
 &lt;p&gt;Run the script and use &lt;code&gt;ls&lt;/code&gt; or &lt;code&gt;list.files()&lt;/code&gt; to verify that a new file, &lt;code&gt;test.png&lt;/code&gt; has been created.
 In your Android launcher, go to &lt;strong&gt;Files &amp;gt; Local &amp;gt; Internal storage &amp;gt; Documents&lt;/strong&gt; (the names might vary depending on your device) and you should see your new plot, which you can open and share like any other image.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/test.png&#34; alt=&#34;Test R plot&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/test.png&#34; alt=&#34;Test R plot&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;r-markdown-on-android&#34;&gt;R Markdown on Android&lt;/h2&gt;
 
@@ -224,16 +647,16 @@ Once again, share or upload it like any other file.&lt;/p&gt;
 I hope you found this useful.
 This blog post was written on a Huawei Honor 8 smartphone using QuickEdit text editor.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/android-r.gif&#34; alt=&#34;R on Android&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/android-r.gif&#34; alt=&#34;R on Android&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>useR! poster: ranking influential communities</title>
-      <link>http://selbydavid.com/2017/06/29/user2017/</link>
+      <link>https://selbydavid.com/2017/06/29/user2017/</link>
       <pubDate>Thu, 29 Jun 2017 18:30:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2017/06/29/user2017/</guid>
+      <guid>https://selbydavid.com/2017/06/29/user2017/</guid>
       <description>&lt;p&gt;Next week I will be presenting a poster at the &lt;a href=&#34;https://user2017.brussels&#34;&gt;useR!2017&lt;/a&gt; conference in Brussels.&lt;/p&gt;
 
 &lt;p&gt;My topic is &lt;strong&gt;Ranking influential communities in networks&lt;/strong&gt;.
@@ -246,7 +669,7 @@ A journal having a high influence score means it tends to receive more citations
 &lt;p&gt;Statistics comes second in the inter-field ranking (after economics).
 We all know how cool statistics is, so the model must be right.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/user2017.png&#34; alt=&#34;useR!2017 poster&#34; title=&#34;Ranking influential communities in networks&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/user2017.png&#34; alt=&#34;useR!2017 poster&#34; title=&#34;Ranking influential communities in networks&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Here is a preview.
 You can download the full PDF on the &lt;a href=&#34;https://user2017.brussels/posters&#34;&gt;conference web site&lt;/a&gt;.&lt;/p&gt;
@@ -261,10 +684,10 @@ An idea for a future R package, perhaps?&lt;/p&gt;
     
     <item>
       <title>Chernoff faces in ggplot2</title>
-      <link>http://selbydavid.com/2017/06/25/ggchernoff/</link>
+      <link>https://selbydavid.com/2017/06/25/ggchernoff/</link>
       <pubDate>Sun, 25 Jun 2017 18:25:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2017/06/25/ggchernoff/</guid>
+      <guid>https://selbydavid.com/2017/06/25/ggchernoff/</guid>
       <description>&lt;p&gt;I am pleased to introduce my first R package for general consumption, &lt;a href=&#34;https://github.com/Selbosh/ggChernoff&#34;&gt;&lt;strong&gt;ggChernoff&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Inspiration stems from Leland Wilkinson’s book, &lt;a href=&#34;http://www.springer.com/gb/book/9780387245447&#34;&gt;&lt;em&gt;The Grammar of Graphics&lt;/em&gt;&lt;/a&gt;, whose principles were later implemented as the &lt;a href=&#34;http://vita.had.co.nz/papers/layered-grammar.pdf&#34;&gt;layered grammar of graphics&lt;/a&gt; in Hadley Wickham’s popular R package, &lt;a href=&#34;http://ggplot2.org/&#34;&gt;ggplot2&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Wilkinson’s grammar generalises data visualisation. Rather than choosing a types of graph from a list—for example bar plot, pie chart or line graphs—instead we break down graphics into algebra, scales, statistics, geometry, coordinates and aesthetics.&lt;/p&gt;
@@ -292,7 +715,7 @@ An idea for a future R package, perhaps?&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;into the following simple visualisation.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/lineplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/lineplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;In &lt;em&gt;Grammar of Graphics&lt;/em&gt; terms, we produce the plot using these semantics.&lt;/p&gt;
 &lt;dl&gt;
 &lt;dt&gt;Variables&lt;/dt&gt;
@@ -321,7 +744,7 @@ An idea for a future R package, perhaps?&lt;/p&gt;
 &lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;Our line plot above is grammatically equivalent to a bar chart—just make the lines thicker! Now, what if we swap Cartesian coordinates for polar coordinates, (r, θ)? The resulting graphic is still grammatically correct, though perhaps not very useful.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/polar-1.png&#34; width=&#34;384&#34; /&gt; We can even transpose it to (θ, r) coordinates, for another grammatically-valid data visualisation. &lt;img src=&#34;http://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/radial-1.png&#34; width=&#34;384&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/polar-1.png&#34; width=&#34;384&#34; /&gt; We can even transpose it to (θ, r) coordinates, for another grammatically-valid data visualisation. &lt;img src=&#34;https://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/radial-1.png&#34; width=&#34;384&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;These plots don’t necessarily have names, so you don’t have to hunt through a list to find the right tool to create them. It is just a matter of knowing how the &lt;em&gt;Grammar of Graphics&lt;/em&gt; works.&lt;/p&gt;
 &lt;p&gt;Look at the specifications for our plot again. Geometry and aesthetics don’t have to be as conventional as lines and boxes of different sizes. Let’s try something completely different!&lt;/p&gt;
 &lt;p&gt;A couple of amendments to the specifications…&lt;/p&gt;
@@ -337,7 +760,7 @@ An idea for a future R package, perhaps?&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/dd&gt;
 &lt;/dl&gt;
-&lt;p&gt;…and we produce this graph. &lt;img src=&#34;http://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/smile-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;…and we produce this graph. &lt;img src=&#34;https://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/smile-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Using faces for multivariate data visualisation is an idea credited to &lt;a href=&#34;https://en.wikipedia.org/wiki/Chernoff_face&#34;&gt;Herman Chernoff&lt;/a&gt;, and which Wilkinson discusses in some detail in &lt;em&gt;The Grammar of Graphics&lt;/em&gt;. In principle, you can represent data using all kinds of weird and wonderful things, so long as you can clearly define geometry, aesthetics, scales and so on to integrate them into a grammatical workflow.&lt;/p&gt;
 &lt;p&gt;My R package, &lt;a href=&#34;https://github.com/Selbosh/ggChernoff&#34;&gt;ggChernoff&lt;/a&gt;, extends ggplot2 with a new face geom and aesthetics for its mouth and eyebrows. By mapping variables to the right aesthetic you can make your data happy or sad, angry or expressionless.&lt;/p&gt;
 &lt;p&gt;Here is another set of aesthetic mappings.&lt;/p&gt;
@@ -351,7 +774,7 @@ An idea for a future R package, perhaps?&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/dd&gt;
 &lt;/dl&gt;
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/eyebrow-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/post/2017-06-25-ggchernoff_files/figure-html/eyebrow-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This is a nice way to add a bit of personality to your data visualisations. Unlike the package &lt;a href=&#34;https://github.com/dill/emoGG&#34;&gt;emoGG&lt;/a&gt;, which involves selecting pre-drawn icons from a list, the faces in ggChernoff are procedurally generated, in the spirit of the grammar of graphics.&lt;/p&gt;
 &lt;p&gt;More demonstrations are coming in a future post. The package ggChernoff is &lt;a href=&#34;https://github.com/Selbosh/ggChernoff&#34;&gt;now available on GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
@@ -359,10 +782,10 @@ An idea for a future R package, perhaps?&lt;/p&gt;
     
     <item>
       <title>Publishing from blogdown to GitHub with Travis</title>
-      <link>http://selbydavid.com/2017/06/22/blogdown-travis/</link>
+      <link>https://selbydavid.com/2017/06/22/blogdown-travis/</link>
       <pubDate>Thu, 22 Jun 2017 08:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2017/06/22/blogdown-travis/</guid>
+      <guid>https://selbydavid.com/2017/06/22/blogdown-travis/</guid>
       <description>
 
 &lt;p&gt;Yihui Xie&amp;rsquo;s new &lt;a href=&#34;https://bookdown.org/yihui/blogdown/&#34;&gt;blogdown&lt;/a&gt; package is a brilliantly elegant and simple tool for creating R-themed blogs and web sites.
@@ -374,7 +797,7 @@ Starting your own blog is as simple as one line of R code:&lt;/p&gt;
 &lt;p&gt;By default, blogdown uses &lt;a href=&#34;http://gohugo.io&#34;&gt;Hugo&lt;/a&gt;, a static web site generator written in Google&amp;rsquo;s Go programming language.
 This has a number of advantages over Jekyll (the site generator that powers GitHub Pages) and from personal experience, everything just seems to work more smoothly.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/hugo-lithium.png&#34; alt=&#34;Example blogdown site&#34; title=&#34;Example blogdown site&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/hugo-lithium.png&#34; alt=&#34;Example blogdown site&#34; title=&#34;Example blogdown site&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Previously I wrote about &lt;a href=&#34;http://selbydavid.com/2017/06/16/rmarkdown-jekyll/&#34;&gt;automatically deploying an R Markdown Jekyll blog with Travis&lt;/a&gt;.
 In this post, I am going to explain how you can use Travis to knit your R Markdown blog posts, then publish them with Hugo/blogdown.&lt;/p&gt;
@@ -417,15 +840,15 @@ More complete information is available in the &lt;a href=&#34;https://bookdown.o
 
 &lt;h2 id=&#34;linking-github-to-travis&#34;&gt;Linking GitHub to Travis&lt;/h2&gt;
 
-&lt;p&gt;This follows my &lt;a href=&#34;http://selbydavid.com/2017/06/16/rmarkdown-jekyll/#linking-github-to-travis&#34;&gt;earlier guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This follows my &lt;a href=&#34;https://selbydavid.com/2017/06/16/rmarkdown-jekyll/#linking-github-to-travis&#34;&gt;earlier guide&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Create a &lt;a href=&#34;https://github.com/settings/tokens&#34;&gt;GitHub personal access token&lt;/a&gt;, making sure the &amp;ldquo;repo&amp;rdquo; box is ticked so it has permission to push to repositories. Copy the token to your clipboard.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/github-pat.png&#34; alt=&#34;Creating a GitHub PAT&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/github-pat.png&#34; alt=&#34;Creating a GitHub PAT&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;On &lt;a href=&#34;https://travis-ci.org/&#34;&gt;Travis&lt;/a&gt;, enable the GitHub repository corresponding to your blogdown site. In Settings, create a new environment variable called &lt;code&gt;GITHUB_PAT&lt;/code&gt; and paste your token into the Value field.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/travis-pat.png&#34; alt=&#34;Adding a Travis environment variable&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/travis-pat.png&#34; alt=&#34;Adding a Travis environment variable&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;configuring-travis&#34;&gt;Configuring Travis&lt;/h2&gt;
 
@@ -478,18 +901,18 @@ In my experience it takes about two minutes from pushing changes to the updated 
 
 &lt;p&gt;If you have nothing better to do then you can watch Travis as it tries to deploy your blog. There&amp;rsquo;s no need to monitor it, though: if it fails for any reason, you&amp;rsquo;ll receive an e-mail.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/travis-log.png&#34; alt=&#34;Travis log for a successful build&#34; title=&#34;Travis log for a successful build&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/travis-log.png&#34; alt=&#34;Travis log for a successful build&#34; title=&#34;Travis log for a successful build&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Hopefully this guide helps. If you have any questions or feedback, feel free to leave a comment below or &lt;a href=&#34;http://selbydavid.com/about&#34;&gt;contact me&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Hopefully this guide helps. If you have any questions or feedback, feel free to leave a comment below or &lt;a href=&#34;https://selbydavid.com/about&#34;&gt;contact me&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Cloudy with a chance of engagement</title>
-      <link>http://selbydavid.com/2017/06/20/cloudy/</link>
+      <link>https://selbydavid.com/2017/06/20/cloudy/</link>
       <pubDate>Tue, 20 Jun 2017 12:30:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2017/06/20/cloudy/</guid>
+      <guid>https://selbydavid.com/2017/06/20/cloudy/</guid>
       <description>&lt;p&gt;Last summer I took part in an internship with the fledgling &lt;a href=&#34;https://www.turing.ac.uk/&#34;&gt;Alan Turing Institute&lt;/a&gt; at the British Library in London.
 My group helped analyse data from &lt;a href=&#34;https://www.cloudywithachanceofpain.com/&#34;&gt;Cloudy with a Chance of Pain&lt;/a&gt;, a citizen science project that uses smartphone app data to model the relationship between weather and joint pain.&lt;/p&gt;
 
@@ -497,7 +920,7 @@ My group helped analyse data from &lt;a href=&#34;https://www.cloudywithachanceo
 Naturally, the actual data available was nothing like that.
 It looked more like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/cloudy-data.png&#34; alt=&#34;Sequences of data entry&#34; title=&#34;Each dot is a day a participant provided data&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/cloudy-data.png&#34; alt=&#34;Sequences of data entry&#34; title=&#34;Each dot is a day a participant provided data&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Unlike in a traditional epidemiological study, people could join at any time.
 Some reported data every day, some every couple of days, some had one week on, one week off, while others would lose interest after a few months, after a few weeks or even after the first day.&lt;/p&gt;
@@ -515,21 +938,21 @@ Each user is clustered according to their probability of switching between these
 &lt;p&gt;An article I wrote about this project was recently published in &lt;a href=&#34;https://www.significancemagazine.com/&#34;&gt;&lt;em&gt;Significance&lt;/em&gt;&lt;/a&gt;, the magazine of the Royal Statistical Society and American Statistical Association.
 For more details on what we did, &lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1111/j.1740-9713.2017.01013.x/abstract&#34;&gt;read the article&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1111/j.1740-9713.2017.01013.x/abstract&#34;&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/cloudy.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1111/j.1740-9713.2017.01013.x/abstract&#34;&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/cloudy.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Pretty errors, warnings and messages in R Markdown</title>
-      <link>http://selbydavid.com/2017/06/18/rmarkdown-alerts/</link>
+      <link>https://selbydavid.com/2017/06/18/rmarkdown-alerts/</link>
       <pubDate>Sun, 18 Jun 2017 13:15:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2017/06/18/rmarkdown-alerts/</guid>
+      <guid>https://selbydavid.com/2017/06/18/rmarkdown-alerts/</guid>
       <description>&lt;p&gt;When knitting an R Markdown document to HTML output, R chunks can produce warnings, errors or messages.&lt;/p&gt;
 
 &lt;p&gt;Normally these messages look like any other console output:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/alerts2.png&#34; alt=&#34;R Markdown alert messages&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/alerts2.png&#34; alt=&#34;R Markdown alert messages&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Pretty ugly, and usually something I find myself trying to hide at the earliest opportunity.&lt;/p&gt;
 
@@ -537,7 +960,7 @@ For more details on what we did, &lt;a href=&#34;http://onlinelibrary.wiley.com/
 
 &lt;p&gt;What if you could have them looking like this?&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2017/alerts.png&#34; alt=&#34;Bootstrap-styled alert messages&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2017/alerts.png&#34; alt=&#34;Bootstrap-styled alert messages&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Bootstrap includes &lt;a href=&#34;http://getbootstrap.com/components/#alerts&#34;&gt;dedicated message boxes&lt;/a&gt; for danger, warnings and information.
 If you were writing an ordinary web site, you would generate these using the following HTML markup:&lt;/p&gt;
@@ -575,10 +998,10 @@ Just add the following code to a chunk near the start of your &lt;code&gt;.Rmd&l
     
     <item>
       <title>Deploying an R Markdown Jekyll site to GitHub Pages</title>
-      <link>http://selbydavid.com/2017/06/16/rmarkdown-jekyll/</link>
+      <link>https://selbydavid.com/2017/06/16/rmarkdown-jekyll/</link>
       <pubDate>Fri, 16 Jun 2017 12:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2017/06/16/rmarkdown-jekyll/</guid>
+      <guid>https://selbydavid.com/2017/06/16/rmarkdown-jekyll/</guid>
       <description>
 
 &lt;p&gt;GitHub Pages&amp;rsquo; built-in &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; support makes it very easy for techie types to deploy static web sites.
@@ -731,7 +1154,7 @@ It knits them to Markdown and makes sure plots get saved to the right directory.
 &lt;p&gt;You should now have a system that automagically renders and deploys your R Markdown posts every time you push them to your site&amp;rsquo;s GitHub repository.
 If anything is unclear, have a look at my &lt;a href=&#34;https://github.com/Selbosh/jekyll-rmd&#34;&gt;minimal working repository&lt;/a&gt; or &lt;a href=&#34;https://github.com/Selbosh/old-jekyll&#34;&gt;a real example&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;If you found this helpful or have any comments or questions, feel free to &lt;a href=&#34;http://selbydavid.com/about&#34;&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you found this helpful or have any comments or questions, feel free to &lt;a href=&#34;https://selbydavid.com/about&#34;&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 
 &lt;hr /&gt;
@@ -746,10 +1169,10 @@ If anything is unclear, have a look at my &lt;a href=&#34;https://github.com/Sel
     
     <item>
       <title>Secret Santa in R</title>
-      <link>http://selbydavid.com/2016/12/07/santa/</link>
+      <link>https://selbydavid.com/2016/12/07/santa/</link>
       <pubDate>Wed, 07 Dec 2016 09:00:00 +0000</pubDate>
       
-      <guid>http://selbydavid.com/2016/12/07/santa/</guid>
+      <guid>https://selbydavid.com/2016/12/07/santa/</guid>
       <description>&lt;p&gt;Our office just exchanged presents for &lt;em&gt;Secret Santa&lt;/em&gt;, a tradition where each person is randomly assigned someone else to give an anonyous gift. One of the challenges of Secret Santa is keeping the pairs of gift-givers and receivers both random and secret. How can you do this while also taking part yourself? Using R, of course!&lt;/p&gt;
 &lt;p&gt;Firstly, recruit people! Write their names down, one per line, in a text file. The order doesn’t matter. For example, we might have a file called &lt;code&gt;santa_names.txt&lt;/code&gt;, with contents as follows:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Tom
@@ -834,7 +1257,7 @@ for (i in seq_along(names)) {
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;Merry Christmas!&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://selbydavid.com/img/2016/santa.jpg&#34; alt=&#34;Secret Santa at Warwick&#34; /&gt;
+&lt;img src=&#34;https://selbydavid.com/img/2016/santa.jpg&#34; alt=&#34;Secret Santa at Warwick&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Secret Santa at Warwick&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -842,36 +1265,36 @@ for (i in seq_along(names)) {
     
     <item>
       <title>Poster: PageRank and the Bradley–Terry model</title>
-      <link>http://selbydavid.com/2016/12/02/ima-poster/</link>
+      <link>https://selbydavid.com/2016/12/02/ima-poster/</link>
       <pubDate>Fri, 02 Dec 2016 09:00:00 +0000</pubDate>
       
-      <guid>http://selbydavid.com/2016/12/02/ima-poster/</guid>
+      <guid>https://selbydavid.com/2016/12/02/ima-poster/</guid>
       <description>&lt;p&gt;Here is my poster that I presented at the 2nd IMA Conference on the Mathematical Challenges of Big Data in London on 1st&amp;ndash;2nd December 2016. It is entitled &amp;ldquo;PageRank and the Bradley&amp;ndash;Terry model: Measuring influence with the Scroogefactor&amp;rdquo;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2016/ima-poster.png&#34; alt=&#34;Zeeman Building, University of Warwick&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2016/ima-poster.png&#34; alt=&#34;Zeeman Building, University of Warwick&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Sent to Coventry</title>
-      <link>http://selbydavid.com/2015/09/30/warwick/</link>
+      <link>https://selbydavid.com/2015/09/30/warwick/</link>
       <pubDate>Wed, 30 Sep 2015 09:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2015/09/30/warwick/</guid>
+      <guid>https://selbydavid.com/2015/09/30/warwick/</guid>
       <description>&lt;p&gt;I have just moved to the University of Warwick to start my PhD in Statistics. So far most of the people I have met would regard Coventry as a bit of a downgrade from Edinburgh, but the Warwick campus seems to make up for it.&lt;/p&gt;
 
 &lt;p&gt;The Mathematics and Statistics building comes with resident geese.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2015/zeeman.jpg&#34; alt=&#34;Zeeman Building, University of Warwick&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2015/zeeman.jpg&#34; alt=&#34;Zeeman Building, University of Warwick&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Edinburgh Broadband Map</title>
-      <link>http://selbydavid.com/2015/05/16/broadband/</link>
+      <link>https://selbydavid.com/2015/05/16/broadband/</link>
       <pubDate>Sat, 16 May 2015 09:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2015/05/16/broadband/</guid>
+      <guid>https://selbydavid.com/2015/05/16/broadband/</guid>
       <description>&lt;p&gt;Despite living in the capital city of Scotland, my home broadband speeds (especially upload speeds) are painfully slow. There is no fibre-optic offered on my road, while my friend two streets over enjoys super-fast internet. It turns out, through the power of data visualisation, that EH16 is a bit of a broadband speed &amp;ldquo;notspot&amp;rdquo; along with a few other slow neighbourhoods throughout Edinburgh. The big empty hole to the east of the city centre is Arthur&amp;rsquo;s Seat and Holyrood Park.&lt;/p&gt;
 
 &lt;p&gt;&lt;script type=&#39;text/javascript&#39; src=&#39;https://public.tableau.com/javascripts/api/viz_v1.js&#39;&gt;&lt;/script&gt;&lt;div class=&#39;tableauPlaceholder&#39; style=&#39;width: 100%; height: 400px; margin: 0 auto;&#39;&gt;&lt;noscript&gt;&lt;a href=&#39;#&#39;&gt;&lt;img alt=&#39;Hotspots and Notspots: Edinburgh Home Broadband Speeds &#39; src=&#39;https:&amp;#47;&amp;#47;public.tableau.com&amp;#47;static&amp;#47;images&amp;#47;Ed&amp;#47;EdinburghBroadband&amp;#47;Map&amp;#47;1_rss.png&#39; style=&#39;border: none&#39; /&gt;&lt;/a&gt;&lt;/noscript&gt;&lt;object class=&#39;tableauViz&#39; width=&#39;100%&#39; height=&#39;400px&#39; style=&#39;display:none;&#39;&gt;&lt;param name=&#39;host_url&#39; value=&#39;https%3A%2F%2Fpublic.tableau.com%2F&#39; /&gt; &lt;param name=&#39;site_root&#39; value=&#39;&#39; /&gt;&lt;param name=&#39;name&#39; value=&#39;EdinburghBroadband&amp;#47;Map&#39; /&gt;&lt;param name=&#39;tabs&#39; value=&#39;no&#39; /&gt;&lt;param name=&#39;toolbar&#39; value=&#39;yes&#39; /&gt;&lt;param name=&#39;static_image&#39; value=&#39;https:&amp;#47;&amp;#47;public.tableau.com&amp;#47;static&amp;#47;images&amp;#47;Ed&amp;#47;EdinburghBroadband&amp;#47;Map&amp;#47;1.png&#39; /&gt; &lt;param name=&#39;animate_transition&#39; value=&#39;yes&#39; /&gt;&lt;param name=&#39;display_static_image&#39; value=&#39;yes&#39; /&gt;&lt;param name=&#39;display_spinner&#39; value=&#39;yes&#39; /&gt;&lt;param name=&#39;display_overlay&#39; value=&#39;yes&#39; /&gt;&lt;param name=&#39;display_count&#39; value=&#39;yes&#39; /&gt;&lt;param name=&#39;showVizHome&#39; value=&#39;no&#39; /&gt;&lt;param name=&#39;showTabs&#39; value=&#39;y&#39; /&gt;&lt;param name=&#39;bootstrapWhenNotified&#39; value=&#39;true&#39; /&gt;&lt;/object&gt;&lt;/div&gt;&lt;/p&gt;
@@ -882,17 +1305,17 @@ for (i in seq_along(names)) {
     
     <item>
       <title>Everything is awesome</title>
-      <link>http://selbydavid.com/2015/02/17/lego/</link>
+      <link>https://selbydavid.com/2015/02/17/lego/</link>
       <pubDate>Tue, 17 Feb 2015 09:00:00 +0000</pubDate>
       
-      <guid>http://selbydavid.com/2015/02/17/lego/</guid>
+      <guid>https://selbydavid.com/2015/02/17/lego/</guid>
       <description>&lt;p&gt;Today I took part in the Lego Calculator Challenge, an event that was run as part of Edinburgh University&amp;rsquo;s Innovative Learning Week. The day included revising the finer points of adding in base 6 and learning about how people managed to do complicated calculations on mechanical computers before Alan Turing invented the Casio &lt;em&gt;fx&lt;/em&gt;-83.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2015/lego/tea.jpg&#34; alt=&#34;Working on the Lego Calculator Challenge&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2015/lego/tea.jpg&#34; alt=&#34;Working on the Lego Calculator Challenge&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;With the aid of &lt;a href=&#34;https://vimeo.com/46344551&#34;&gt;this therapeutic video&lt;/a&gt;, Lego expert Alex Allmont showed us some of the clever things that are possible using gears and ratchets. I also learnt the existence of and the inner workings of a car&amp;rsquo;s differential gear in a ten-minute time span, thanks to an excellent &lt;a href=&#34;https://www.youtube.com/watch?v=K4JhruinbWc&#34;&gt;film by Chevrolet from the 1930s&lt;/a&gt;. Using exactly the same kind of differential gear, but in reverse, we built our own &amp;ldquo;differential adders&amp;rdquo;, capable of adding or subtracting numbers up to 20.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2015/lego/differential.jpg&#34; alt=&#34;Stuff&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2015/lego/differential.jpg&#34; alt=&#34;Stuff&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Selecting two numbers from the top wheels will automatically compute and output their sum on the lower wheel. Conversely, fixing a number on the lower wheel first will let you perform subtraction. Awesome.&lt;/p&gt;
 </description>
@@ -900,24 +1323,24 @@ for (i in seq_along(names)) {
     
     <item>
       <title>Twitter score predictions are not infallible</title>
-      <link>http://selbydavid.com/2014/06/14/world-cup/</link>
+      <link>https://selbydavid.com/2014/06/14/world-cup/</link>
       <pubDate>Sat, 14 Jun 2014 09:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2014/06/14/world-cup/</guid>
+      <guid>https://selbydavid.com/2014/06/14/world-cup/</guid>
       <description>&lt;p&gt;This evening saw the Netherlands face Spain for their first match in the group stage of the 2014 Fifa World Cup. 604 score predictions were made on Twitter in the hour before kick-off. When the final whistle blew, 100% of them had missed the mark.&lt;/p&gt;
 
 &lt;p&gt;The Twittersphere overwhelmingly tipped a 2&amp;ndash;1 victory to Spain, the reigning world champions. A bit of a shame, then, that the Netherlands trounced them 5&amp;ndash;1. Maybe the &lt;a href=&#34;http://www.bbc.co.uk/news/uk-england-27810714&#34; title=&#34;World Cup 2014: Animals &#39;predict&#39; World Cup results - BBC News&#34;&gt;animal pundits&lt;/a&gt; will do better.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2014/twitterscore.png&#34; alt=&#34;Twitter predicted vs. actual score of Group B Netherlands vs. Spain match on 13 June 2014&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2014/twitterscore.png&#34; alt=&#34;Twitter predicted vs. actual score of Group B Netherlands vs. Spain match on 13 June 2014&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Data mining: tea is for Twitter</title>
-      <link>http://selbydavid.com/2014/06/07/tea-bieber/</link>
+      <link>https://selbydavid.com/2014/06/07/tea-bieber/</link>
       <pubDate>Sat, 07 Jun 2014 09:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2014/06/07/tea-bieber/</guid>
+      <guid>https://selbydavid.com/2014/06/07/tea-bieber/</guid>
       <description>&lt;p&gt;As part of my first foray into data science, I decided to have a go at opinion mining on Twitter. It&amp;rsquo;s common knowledge that everything stops for tea, but how much does the Twittersphere agree? And what else are microbloggers saying about the drink?&lt;/p&gt;
 
 &lt;p&gt;Using the free R statistical software it is very easy to start data mining on Twitter&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:R&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:R&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. A short R script quickly retrieved 699 recent tweets containing the tag #tea. The code looks something like this:&lt;/p&gt;
@@ -936,13 +1359,13 @@ text = laply(data, function(t) t$getText())
 
 &lt;p&gt;So what are our friends on Twitter saying about tea? Finding out calls for a graph. But not just any graph: a word cloud&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:wc&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:wc&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, displaying words according to frequency.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2014/tea.png&#34; alt=&#34;Word cloud made from 699 tweets containing the hashtag &#39;#tea&#39;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2014/tea.png&#34; alt=&#34;Word cloud made from 699 tweets containing the hashtag &#39;#tea&#39;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Obviously every tweet contains &amp;ldquo;tea&amp;rdquo; because that&amp;rsquo;s what was sought. People also like to discuss milk and sugar, as well as coffee (possibly during cataclysmic breakfast drink dilemmas). To the right of centre, &lt;strong&gt;tcot&lt;/strong&gt; stands for &amp;ldquo;top conservatives on Twitter&amp;rdquo;, who enjoy talking about tea &amp;mdash; and tea parties &amp;mdash; as much as anyone. Other notable phrases include &amp;ldquo;freedom&amp;rdquo;, &amp;ldquo;greatness&amp;rdquo;, &amp;ldquo;best&amp;rdquo; and &amp;ldquo;delicious&amp;rdquo;. But we&amp;rsquo;ll do some more objective analysis shortly.&lt;/p&gt;
 
 &lt;p&gt;For variety, I also had a go at mining Twitter&amp;rsquo;s public streaming API for a larger sample, this time using Python. Here&amp;rsquo;s what some ten thousand tweets say about Canadian pop star Justin Bieber:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2014/justin.png&#34; alt=&#34;Word cloud made from 10,000 tweets containing the word &#39;bieber&#39;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2014/justin.png&#34; alt=&#34;Word cloud made from 10,000 tweets containing the word &#39;bieber&#39;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;He&amp;rsquo;s racist? &lt;em&gt;And&lt;/em&gt; shirtless. Who knew?&lt;/p&gt;
 
@@ -960,7 +1383,7 @@ text = laply(data, function(t) t$getText())
 &lt;p&gt;Justin Bieber has serious issues, i wish he&amp;rsquo;d just sort his shit out because I for one am sick of seeing stupid crap about him in the news&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2014/sentiment.png&#34; alt=&#34;Histogram comparison of sentiment scores for tweets about tea and Justin Bieber&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2014/sentiment.png&#34; alt=&#34;Histogram comparison of sentiment scores for tweets about tea and Justin Bieber&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Our #tea dataset has a score distribution that&amp;rsquo;s mostly positive, with a mean sentiment score of +0.15 and a variance of 0.36. Clearly our intuition is correct and people really do like tea. Indeed, nobody really had much of a bad word to say about the beverage; the minimum score given was -2, which could easily have been obtained from a false-negative tweet like &amp;ldquo;I hate people who dislike #tea&amp;rdquo; (though it wasn&amp;rsquo;t).&lt;/p&gt;
 
@@ -987,40 +1410,40 @@ text = laply(data, function(t) t$getText())
     
     <item>
       <title>T-set mug</title>
-      <link>http://selbydavid.com/2014/06/05/t-set/</link>
+      <link>https://selbydavid.com/2014/06/05/t-set/</link>
       <pubDate>Thu, 05 Jun 2014 09:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2014/06/05/t-set/</guid>
-      <description>&lt;p&gt;The set of all &lt;em&gt;t&lt;/em&gt; makes the perfect tea set for mathematicians and other numerate geeks. A natural accompaniment to your &lt;a href=&#34;http://selbydavid.com/2014/06/04/t-pot/&#34;&gt;Student&amp;rsquo;s t-distribution teapot&lt;/a&gt;, the t-set lets you collect mugs in a mathematical way.&lt;/p&gt;
+      <guid>https://selbydavid.com/2014/06/05/t-set/</guid>
+      <description>&lt;p&gt;The set of all &lt;em&gt;t&lt;/em&gt; makes the perfect tea set for mathematicians and other numerate geeks. A natural accompaniment to your &lt;a href=&#34;https://selbydavid.com/2014/06/04/t-pot/&#34;&gt;Student&amp;rsquo;s t-distribution teapot&lt;/a&gt;, the t-set lets you collect mugs in a mathematical way.&lt;/p&gt;
 
 &lt;p&gt;Get yours now &lt;a href=&#34;http://www.zazzle.co.uk/mathematical_t_set_black_coffee_mugs-168015681676499039&#34; title=&#34;t-set mug&#34;&gt;from Zazzle&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2014/t-set.png&#34; alt=&#34;t-set mug&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2014/t-set.png&#34; alt=&#34;t-set mug&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Student&#39;s t-distribution teapot</title>
-      <link>http://selbydavid.com/2014/06/04/t-pot/</link>
+      <link>https://selbydavid.com/2014/06/04/t-pot/</link>
       <pubDate>Wed, 04 Jun 2014 09:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2014/06/04/t-pot/</guid>
+      <guid>https://selbydavid.com/2014/06/04/t-pot/</guid>
       <description>&lt;p&gt;Where is a student&amp;rsquo;s tea distributed? Probably in a teapot. Thus the &lt;a href=&#34;http://www.zazzle.co.uk/students_t_distribution_teapot-180267930175357597&#34;&gt;Student&amp;rsquo;s t-distribution teapot&lt;/a&gt; is born.&lt;/p&gt;
 
 &lt;p&gt;Warmly emblazoned across the outside is the probability density function of &lt;a href=&#34;http://en.wikipedia.org/wiki/Student&#39;s_t-distribution&#34;&gt;Student&amp;rsquo;s t-distribution&lt;/a&gt;, in case you need to estimate the mean of a normally distributed population and pour a cup of tea at the same time.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://selbydavid.com/img/2014/t-pot.png&#34; alt=&#34;Student&#39;s t-distribution teapot&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2014/t-pot.png&#34; alt=&#34;Student&#39;s t-distribution teapot&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Lovingly designed for students and academics who take their probability and statistics as seriously as they take a proper brew. You can get one for yourself &lt;a href=&#34;http://www.zazzle.co.uk/students_t_distribution_teapot-180267930175357597&#34;&gt;from Zazzle&lt;/a&gt;. Goes nicely with a &lt;a href=&#34;http://selbydavid.com/2014/06/05/t-set/&#34;&gt;t-set mug&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Lovingly designed for students and academics who take their probability and statistics as seriously as they take a proper brew. You can get one for yourself &lt;a href=&#34;http://www.zazzle.co.uk/students_t_distribution_teapot-180267930175357597&#34;&gt;from Zazzle&lt;/a&gt;. Goes nicely with a &lt;a href=&#34;https://selbydavid.com/2014/06/05/t-set/&#34;&gt;t-set mug&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Contours Magazine</title>
-      <link>http://selbydavid.com/2014/06/04/contours/</link>
+      <link>https://selbydavid.com/2014/06/04/contours/</link>
       <pubDate>Wed, 04 Jun 2014 08:00:00 +0100</pubDate>
       
-      <guid>http://selbydavid.com/2014/06/04/contours/</guid>
+      <guid>https://selbydavid.com/2014/06/04/contours/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.maths.ed.ac.uk/outreach/contours-magazine&#34;&gt;Contours magazine&lt;/a&gt; is a student publication produced by the University of Edinburgh School of Mathematics, featuring interviews with maths lecturers. I was editor and graphic designer for the 2013&amp;ndash;14 edition. &lt;a href=&#34;http://issuu.com/uoemaths/docs/contours_web&#34;&gt;Click here to read it on Issuu&lt;/a&gt;, or pick up a hard copy from the King&amp;rsquo;s Buildings campus.&lt;/p&gt;
 
 &lt;blockquote&gt;
