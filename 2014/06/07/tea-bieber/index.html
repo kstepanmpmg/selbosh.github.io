@@ -20,6 +20,7 @@ Using the free R statistical software it is very easy to start data mining on Tw
 
 
 <meta property="article:published_time" content="2014-06-07T09:00:00&#43;01:00"/>
+
 <meta property="article:modified_time" content="2014-06-07T09:00:00&#43;01:00"/>
 
 
@@ -39,20 +40,15 @@ Using the free R statistical software it is very easy to start data mining on Tw
 Using the free R statistical software it is very easy to start data mining on Twitter1. A short R script quickly retrieved 699 recent tweets containing the tag #tea.">
 
 
+<meta itemprop="datePublished" content="2014-06-07T09:00:00&#43;01:00" />
 <meta itemprop="dateModified" content="2014-06-07T09:00:00&#43;01:00" />
 <meta itemprop="wordCount" content="596">
 
 
 
-<meta itemprop="keywords" content="france,r," />
+<meta itemprop="keywords" content="" />
 
-
-
-  <meta name="twitter:card" content="summary"/>
-
-
-
-<meta name="twitter:text:title" content="Data mining: tea is for Twitter"/>
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Data mining: tea is for Twitter"/>
 <meta name="twitter:description" content="As part of my first foray into data science, I decided to have a go at opinion mining on Twitter. It&rsquo;s common knowledge that everything stops for tea, but how much does the Twittersphere agree? And what else are microbloggers saying about the drink?
 Using the free R statistical software it is very easy to start data mining on Twitter1. A short R script quickly retrieved 699 recent tweets containing the tag #tea."/>
@@ -70,7 +66,7 @@ Using the free R statistical software it is very easy to start data mining on Tw
 
 
 <meta name="theme" content="hugo-tea">
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.42.2" />
 
 
 
@@ -148,7 +144,7 @@ Using the free R statistical software it is very easy to start data mining on Tw
     <section>
     <p>As part of my first foray into data science, I decided to have a go at opinion mining on Twitter. It&rsquo;s common knowledge that everything stops for tea, but how much does the Twittersphere agree? And what else are microbloggers saying about the drink?</p>
 
-<p>Using the free R statistical software it is very easy to start data mining on Twitter<sup class="footnote-ref" id="fnref:R"><a rel="footnote" href="#fn:R">1</a></sup>. A short R script quickly retrieved 699 recent tweets containing the tag #tea. The code looks something like this:</p>
+<p>Using the free R statistical software it is very easy to start data mining on Twitter<sup class="footnote-ref" id="fnref:R"><a href="#fn:R">1</a></sup>. A short R script quickly retrieved 699 recent tweets containing the tag #tea. The code looks something like this:</p>
 
 <pre><code class="language-r">library(twitteR)
 cred &lt;- OAuthFactory$new(...)
@@ -160,9 +156,9 @@ data&lt;- searchTwitter(&quot;#tea&quot;, n=1500, cainfo=&quot;cacert.pem&quot;)
 text = laply(data, function(t) t$getText())
 </code></pre>
 
-<p>Before anything interesting can be gleaned from the dataset, some housework must be done. Text mining<sup class="footnote-ref" id="fnref:tm"><a rel="footnote" href="#fn:tm">2</a></sup> removes irrelevant URLs, punctuation, symbols and &ldquo;stop words&rdquo;, leaving each tweet ready for scrutiny.</p>
+<p>Before anything interesting can be gleaned from the dataset, some housework must be done. Text mining<sup class="footnote-ref" id="fnref:tm"><a href="#fn:tm">2</a></sup> removes irrelevant URLs, punctuation, symbols and &ldquo;stop words&rdquo;, leaving each tweet ready for scrutiny.</p>
 
-<p>So what are our friends on Twitter saying about tea? Finding out calls for a graph. But not just any graph: a word cloud<sup class="footnote-ref" id="fnref:wc"><a rel="footnote" href="#fn:wc">3</a></sup>, displaying words according to frequency.</p>
+<p>So what are our friends on Twitter saying about tea? Finding out calls for a graph. But not just any graph: a word cloud<sup class="footnote-ref" id="fnref:wc"><a href="#fn:wc">3</a></sup>, displaying words according to frequency.</p>
 
 <p><img src="https://selbydavid.com/img/2014/tea.png" alt="Word cloud made from 699 tweets containing the hashtag '#tea'" /></p>
 
@@ -174,7 +170,7 @@ text = laply(data, function(t) t$getText())
 
 <p>He&rsquo;s racist? <em>And</em> shirtless. Who knew?</p>
 
-<p>To assess public opinion more objectively, we can perform sentiment analysis, which involves assigning a mood to each tweet and observing the distribution<sup class="footnote-ref" id="fnref:sent"><a rel="footnote" href="#fn:sent">4</a></sup>. A tweet&rsquo;s mood score derives from comparing each constituent word against a database of &ldquo;positive&rdquo; and &ldquo;negative&rdquo; English words then adding and subtracting 1 respectively. A total less than -2 is very negative, zero is neutral and greater than +2 is very positive.</p>
+<p>To assess public opinion more objectively, we can perform sentiment analysis, which involves assigning a mood to each tweet and observing the distribution<sup class="footnote-ref" id="fnref:sent"><a href="#fn:sent">4</a></sup>. A tweet&rsquo;s mood score derives from comparing each constituent word against a database of &ldquo;positive&rdquo; and &ldquo;negative&rdquo; English words then adding and subtracting 1 respectively. A total less than -2 is very negative, zero is neutral and greater than +2 is very positive.</p>
 
 <p>For example, this tweet gets a score of +5:</p>
 
@@ -278,13 +274,16 @@ MathJax.Hub.Config({
 
     
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-11136457-6', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-11136457-6', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
   </body>

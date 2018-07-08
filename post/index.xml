@@ -15,8 +15,29 @@
 		</image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-GB</language>
-    <lastBuildDate>Tue, 29 May 2018 15:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jul 2018 11:00:00 +0200</lastBuildDate>
     <atom:link href="https://selbydavid.com/post/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Le lait, le comprenez-vous?</title>
+      <link>https://selbydavid.com/2018/07/08/milk/</link>
+      <pubDate>Sun, 08 Jul 2018 11:00:00 +0200</pubDate>
+      
+      <guid>https://selbydavid.com/2018/07/08/milk/</guid>
+      <description>&lt;p&gt;Buying milk in France is not like at home.
+In the supermarket, it is always found in the farthest possible point from the shop entrance, but the similarities end there.&lt;/p&gt;
+
+&lt;p&gt;The colour scheme used to be the same as in Old Blighty but Napoléon changed it in the early 1800s, around the same time he switched everybody to driving on the wrong side of the road.
+Blue milk bottles are semi-skimmed, red is full fat&amp;mdash;except when it&amp;rsquo;s green: then it&amp;rsquo;s &lt;em&gt;organic&lt;/em&gt; full fat&amp;mdash;and skimmed milk bottles are octarine or something.
+In the UK, it&amp;rsquo;s far simpler: red for skimmed, green for semi-skimmed, blue for full fat, gold for fuller than full fat and then orange for that other level that also exists.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2018/paris/milk.jpg&#34; alt=&#34;Milk in a French supermarket&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;French milk bottles don&amp;rsquo;t have little handles on them, unlike British ones, maybe because the dexterity to add &amp;lsquo;just a dash&amp;rsquo; to a cup of tea is not in high demand in France.
+Bottles of drain cleaner do have the little handles, though.
+I draw no conclusions from this.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>One week in Paris</title>
@@ -1138,7 +1159,7 @@ How can we write and edit blog posts in R Markdown and serve them on GitHub Page
 
 &lt;p&gt;In this post I will explain how you can use &lt;a href=&#34;https://travis-ci.org/&#34;&gt;Travis CI&lt;/a&gt; to knit R Markdown posts and deploy them to a GitHub Pages Jekyll site.&lt;/p&gt;
 
-&lt;p&gt;Yihui Xie&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:yx&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:yx&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; has added Jekyll support to the &lt;a href=&#34;https://cran.rstudio.com/web/packages/servr/index.html&#34;&gt;servr&lt;/a&gt; package and published a &lt;a href=&#34;https://jekyll.yihui.name/2014/09/jekyll-with-knitr.html&#34;&gt;blog post&lt;/a&gt; and &lt;a href=&#34;https://github.com/yihui/knitr-jekyll&#34; title=&#34;knitr-jekyll&#34;&gt;GitHub repository&lt;/a&gt; demonstrating how to use &lt;code&gt;servr::jekyll&lt;/code&gt; to serve a Jekyll site locally with R Markdown.&lt;/p&gt;
+&lt;p&gt;Yihui Xie&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:yx&#34;&gt;&lt;a href=&#34;#fn:yx&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; has added Jekyll support to the &lt;a href=&#34;https://cran.rstudio.com/web/packages/servr/index.html&#34;&gt;servr&lt;/a&gt; package and published a &lt;a href=&#34;https://jekyll.yihui.name/2014/09/jekyll-with-knitr.html&#34;&gt;blog post&lt;/a&gt; and &lt;a href=&#34;https://github.com/yihui/knitr-jekyll&#34; title=&#34;knitr-jekyll&#34;&gt;GitHub repository&lt;/a&gt; demonstrating how to use &lt;code&gt;servr::jekyll&lt;/code&gt; to serve a Jekyll site locally with R Markdown.&lt;/p&gt;
 
 &lt;p&gt;This is a nice, but incomplete solution, because it means we can only really write and edit posts from computers on which R, servr and Jekyll are installed.
 Jekyll is written in Ruby, which can be a pain to install on Windows and fiddly to configure for GitHub Pages.&lt;/p&gt;
@@ -1469,7 +1490,7 @@ for (i in seq_along(names)) {
       <guid>https://selbydavid.com/2014/06/07/tea-bieber/</guid>
       <description>&lt;p&gt;As part of my first foray into data science, I decided to have a go at opinion mining on Twitter. It&amp;rsquo;s common knowledge that everything stops for tea, but how much does the Twittersphere agree? And what else are microbloggers saying about the drink?&lt;/p&gt;
 
-&lt;p&gt;Using the free R statistical software it is very easy to start data mining on Twitter&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:R&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:R&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. A short R script quickly retrieved 699 recent tweets containing the tag #tea. The code looks something like this:&lt;/p&gt;
+&lt;p&gt;Using the free R statistical software it is very easy to start data mining on Twitter&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:R&#34;&gt;&lt;a href=&#34;#fn:R&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. A short R script quickly retrieved 699 recent tweets containing the tag #tea. The code looks something like this:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(twitteR)
 cred &amp;lt;- OAuthFactory$new(...)
@@ -1481,9 +1502,9 @@ data&amp;lt;- searchTwitter(&amp;quot;#tea&amp;quot;, n=1500, cainfo=&amp;quot;c
 text = laply(data, function(t) t$getText())
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Before anything interesting can be gleaned from the dataset, some housework must be done. Text mining&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:tm&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:tm&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; removes irrelevant URLs, punctuation, symbols and &amp;ldquo;stop words&amp;rdquo;, leaving each tweet ready for scrutiny.&lt;/p&gt;
+&lt;p&gt;Before anything interesting can be gleaned from the dataset, some housework must be done. Text mining&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:tm&#34;&gt;&lt;a href=&#34;#fn:tm&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; removes irrelevant URLs, punctuation, symbols and &amp;ldquo;stop words&amp;rdquo;, leaving each tweet ready for scrutiny.&lt;/p&gt;
 
-&lt;p&gt;So what are our friends on Twitter saying about tea? Finding out calls for a graph. But not just any graph: a word cloud&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:wc&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:wc&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, displaying words according to frequency.&lt;/p&gt;
+&lt;p&gt;So what are our friends on Twitter saying about tea? Finding out calls for a graph. But not just any graph: a word cloud&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:wc&#34;&gt;&lt;a href=&#34;#fn:wc&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, displaying words according to frequency.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://selbydavid.com/img/2014/tea.png&#34; alt=&#34;Word cloud made from 699 tweets containing the hashtag &#39;#tea&#39;&#34; /&gt;&lt;/p&gt;
 
@@ -1495,7 +1516,7 @@ text = laply(data, function(t) t$getText())
 
 &lt;p&gt;He&amp;rsquo;s racist? &lt;em&gt;And&lt;/em&gt; shirtless. Who knew?&lt;/p&gt;
 
-&lt;p&gt;To assess public opinion more objectively, we can perform sentiment analysis, which involves assigning a mood to each tweet and observing the distribution&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:sent&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:sent&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. A tweet&amp;rsquo;s mood score derives from comparing each constituent word against a database of &amp;ldquo;positive&amp;rdquo; and &amp;ldquo;negative&amp;rdquo; English words then adding and subtracting 1 respectively. A total less than -2 is very negative, zero is neutral and greater than +2 is very positive.&lt;/p&gt;
+&lt;p&gt;To assess public opinion more objectively, we can perform sentiment analysis, which involves assigning a mood to each tweet and observing the distribution&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:sent&#34;&gt;&lt;a href=&#34;#fn:sent&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. A tweet&amp;rsquo;s mood score derives from comparing each constituent word against a database of &amp;ldquo;positive&amp;rdquo; and &amp;ldquo;negative&amp;rdquo; English words then adding and subtracting 1 respectively. A total less than -2 is very negative, zero is neutral and greater than +2 is very positive.&lt;/p&gt;
 
 &lt;p&gt;For example, this tweet gets a score of +5:&lt;/p&gt;
 

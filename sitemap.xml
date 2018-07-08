@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://selbydavid.com/2018/07/08/milk/</loc>
+    <lastmod>2018-07-08T11:00:00+02:00</lastmod>
+  </url>
   
   <url>
     <loc>https://selbydavid.com/2018/05/29/paris/</loc>
@@ -112,13 +118,13 @@
   
   <url>
     <loc>https://selbydavid.com/categories/france/</loc>
-    <lastmod>2018-05-29T15:00:00+02:00</lastmod>
+    <lastmod>2018-07-08T11:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://selbydavid.com/post/</loc>
-    <lastmod>2018-05-29T15:00:00+02:00</lastmod>
+    <lastmod>2018-07-08T11:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -135,7 +141,7 @@
   
   <url>
     <loc>https://selbydavid.com/</loc>
-    <lastmod>2018-05-29T15:00:00+02:00</lastmod>
+    <lastmod>2018-07-08T11:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
